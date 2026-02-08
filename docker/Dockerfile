@@ -33,6 +33,11 @@ RUN uv run camoufox fetch
 
 ADD . /app
 
-ENTRYPOINT ["/usr/bin/tini", "--"]
 
-CMD xvfb-run --auto-servernum --server-num=1 --server-args='-screen 0, 1920x1080x24' uv run hc --help
+
+# --- Auto-Generated Entrypoint Configuration ---
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+RUN mkdir -p /var/log && touch /var/log/app.log
+EXPOSE 33777
+ENTRYPOINT ["/entrypoint.sh"]
